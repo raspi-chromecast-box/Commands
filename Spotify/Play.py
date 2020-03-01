@@ -57,19 +57,18 @@ def RefreshSpotifyTokenIfNecessary():
 RefreshSpotifyTokenIfNecessary()
 
 
-CAST_NAME = "Attic TV"
-
 parser = argparse.ArgumentParser(
 	description="Example on how to use the Spotify Controller.")
 parser.add_argument('--show-debug', help='Enable debug log',
 					action='store_true')
 parser.add_argument('--cast',
 					help='Name of cast device (default: "%(default)s")',
-					default=CAST_NAME)
+					default=OurPersonalDB.self[ "spotify" ][ "chromecast_name" ])
 # parser.add_argument('--user', help='Spotify username', required=True)
 # parser.add_argument('--password', help='Spotify password', required=True)
+#parser.add_argument('--uri', help='Spotify uri(s) (default: "%(default)s")',default=["spotify:track:3Zwu2K0Qa5sT6teCCHPShP"],nargs='+')
 parser.add_argument('--uri', help='Spotify uri(s) (default: "%(default)s")',
-					default=["spotify:track:3Zwu2K0Qa5sT6teCCHPShP"],
+					default=["spotify:track:1T4vRONLAZCfutUESY6hok"],
 					nargs='+')
 args = parser.parse_args()
 

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import sys
 import pychromecast
 from pychromecast.controllers.youtube import YouTubeController

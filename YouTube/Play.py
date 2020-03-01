@@ -11,7 +11,7 @@ OurPersonalDB = JSONFileOBJDB.create({
 
 # Change to the video id of the YouTube video
 # video id is the last part of the url http://youtube.com/watch?v=video_id
-VIDEO_ID = sys.argv[ 1 ] or "EfZu4BCi644"
+VIDEO_ID = sys.argv[ 1 ]
 
 chromecasts = pychromecast.get_chromecasts()
 cast = next(cc for cc in chromecasts if cc.device.friendly_name == OurPersonalDB.self[ "spotify" ][ "chromecast_name" ])

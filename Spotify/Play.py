@@ -19,6 +19,7 @@ import JSONFileOBJDB
 from pathlib import Path
 
 import pychromecast
+from pychromecast import Chromecast
 from pychromecast.controllers.spotify import SpotifyController
 import spotify_token as st
 import spotipy
@@ -77,12 +78,18 @@ if args.show_debug:
 	# Uncomment to enable http.client debug log
 	#http_client.HTTPConnection.debuglevel = 1
 
-chromecasts = pychromecast.get_chromecasts()
-cast = None
-for _cast in chromecasts:
-	if _cast.name == args.cast:
-		cast = _cast
-		break
+# start_chromecast_discover_time = int( time.time() )
+# chromecasts = pychromecast.get_chromecasts()
+# cast = None
+# for _cast in chromecasts:
+# 	if _cast.name == args.cast:
+# 		cast = _cast
+# 		break
+# stop_chromecast_discover_time = int( time.time() )
+# chromecast_discover_time_duration = stop_chromecast_discover_time - start_chromecast_discover_time
+# print( "Found the Chromecast using DNS resolution magic in " + str( chromecast_discover_time_duration ) + " seconds" )
+
+cast = Chromecast( OurPersonalDB.self[ "chromecast_ip" ] )
 
 if not cast:
 	print('No chromecast with name "{}" discovered'.format(args.cast))
@@ -155,7 +162,7 @@ if not spotify_device_id:
 # https://github.com/plamere/spotipy/blob/13109c1613594e098f5ecddc64edbf465306052b/spotipy/client.py#L1276
 # also https://github.com/plamere/spotipy/tree/master/examples
 # ==========================================================================================================
-#client.shuffle( False )
+#client.shuffle( True )
 #client.shuffle( False )
 
 # client.pause_playback()
@@ -173,3 +180,7 @@ if args.uri[0].find('track') > 0:
   client.start_playback(device_id=spotify_device_id, uris=args.uri)
 else:
   client.start_playback(device_id=spotify_device_id, context_uri=args.uri[0])
+
+time.sleep( 2 )
+client.shuffle( True )
+# client.next_track()
